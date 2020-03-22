@@ -1,0 +1,23 @@
+{
+  "name": "T-View",
+  "version": "1.0.0",
+  "description": "T-view",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XiaTerry/T-View.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XiaTerry/T-View/issues"
+  },
+  "homepage": "https://github.com/XiaTerry/T-View#readme",
+  "devDependencies": {
+    "webpack": "^4.42.0"
+  }
+}
