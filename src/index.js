@@ -1,25 +1,7 @@
 /*
  * @Author: xiatairui_i
- * @Date: 2020-03-22 18:18:38
+ * @Date: 2020-03-17 21:08:16
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 18:47:28
+ * @LastEditTime: 2020-03-17 21:08:17
  * @Description: File Content
  */
-// new TView({data:{...}})
-
-class Tview {
-  constructor(options) {
-    this.$options = options
-
-    // 数据响应化
-    this.$data = options.data
-    new Observer(this.$data, this)
-
-    new Compile(options.el, this)
-
-    // created执行
-    if (options.created) {
-      options.created.call(this)
-    }
-  }
-}

@@ -1,39 +1,28 @@
 /*
  * @Author: xiatairui_i
- * @Date: 2020-03-22 18:18:09
+ * @Date: 2020-03-17 21:03:46
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 18:24:20
+ * @LastEditTime: 2020-04-06 19:12:07
  * @Description: File Content
  */
-//npm install --save-dev style-loader css-loader file-loader
 const path = require('path')
-
 module.exports = {
+  //入口文件的配置项
   entry: {
-    Tview: './src/index.js',
-    complie: './src/compile.js',
-    observer: './src/observer/index.js',
+    entry: './src/index.js',
   },
+  //出口文件的配置项
   output: {
-    filename: '[name].js',
+    //输出的路径，用了Node语法
     path: path.resolve(__dirname, 'dist'),
+    //输出的文件名称
+    filename: 'bundle.js',
   },
-  mode: 'development',
-  devServer: {
-    contentBase: false,
-    //我这里没有设置contentBase，个人研究contentBase必须指向存在的bundle.js文件所在目录，
-    //因为这里是开发模式，所以dist目录并不存在，所以用false.
-    host: 'localhost',
-    port: '8888',
-    inline: true, //webpack官方推荐
-    watchOptions: {
-      aggregateTimeout: 2000, //浏览器延迟多少秒更新
-      poll: 1000, //每秒检查一次变动
-    },
-    compress: true, //一切服务都启用gzip 压缩
-    historyApiFallback: true, //找不到页面默认跳index.html
-    hot: true, //启动热更新，必须搭配new webpack.HotModuleReplacementPlugin()插件
-    open: true,
-  },
+  mode: 'development', //注意最新版本必须加mode，否则会报错
+  //模块：例如解读CSS,图片如何转换，压缩
   module: {},
+  //插件，用于生产模版和各项功能
+  plugins: [],
+  //配置webpack开发服务功能
+  devServer: {},
 }
