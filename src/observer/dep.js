@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-03-31 15:38:43
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 18:59:14
+ * @LastEditTime: 2020-04-06 21:14:37
  * @Description: File Content
  */
 // Dep：用来管理Watcher
@@ -19,6 +19,7 @@ class Dep {
   removeSub(sub) {
     remove(this.subs, sub)
   }
+
   // 添加一个依赖
   depend() {
     if (window.target) {

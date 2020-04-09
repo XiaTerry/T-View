@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-03-31 14:36:02
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 18:51:59
+ * @LastEditTime: 2020-04-06 21:20:02
  * @Description: File Content
  */
 
@@ -12,9 +12,7 @@ class Observer {
     this.vm = vm
 
     if (Array.isArray(value)) {
-      console.log(`${value}数组`)
     } else {
-      console.log(`${value}对象`)
       this.walk(value)
     }
   }
@@ -60,14 +58,13 @@ function defineReactive(obj, key, val) {
     configurable: true,
     get() {
       dep.depend()
-      console.log(`${key}属性被读取了`)
+
       return val
     },
     set(newVal) {
       if (val === newVal) {
         return
       }
-      console.log(`${key}属性被修改了`)
 
       val = newVal
       dep.notify()

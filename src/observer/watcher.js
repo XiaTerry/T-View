@@ -2,13 +2,11 @@
  * @Author: xiatairui_i
  * @Date: 2020-03-31 15:55:24
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 18:38:56
+ * @LastEditTime: 2020-04-06 21:20:10
  * @Description: File Content
  */
 class Watcher {
   constructor(vm, expOrFn, cb) {
-    console.log(vm)
-
     this.vm = vm
     this.cb = cb
     this.getter = parsePath(expOrFn)

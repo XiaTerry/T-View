@@ -2,13 +2,14 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-06 18:32:20
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 19:07:22
+ * @LastEditTime: 2020-04-06 21:27:52
  * @Description: File Content
  */
+const doc = document
 class Compile {
   constructor(el, vm) {
     // 要遍历的宿主节点
-    this.$el = document.querySelector(el)
+    this.$el = doc.querySelector(el)
 
     this.$vm = vm
 
@@ -25,19 +26,23 @@ class Compile {
 
   // 将宿主元素中代码片段拿出来遍历，这样做比较高效
   node2Fragment(el) {
-    const frag = document.createDocumentFragment()
+    const frag = doc.createDocumentFragment()
+
     // 将el中所有子元素搬家至frag中
     let child
     while ((child = el.firstChild)) {
       frag.appendChild(child)
     }
+
     return frag
   }
+
   // 编译过程
   compile(el) {
     const childNodes = el.childNodes
     Array.from(childNodes).forEach((node) => {
       // 类型判断
+      console.log(node)
       if (this.isElement(node)) {
         // 元素
         // console.log('编译元素'+node.nodeName);

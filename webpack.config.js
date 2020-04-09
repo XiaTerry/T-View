@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-03-17 21:03:46
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-06 19:12:07
+ * @LastEditTime: 2020-04-06 20:46:09
  * @Description: File Content
  */
 const path = require('path')
@@ -16,7 +16,7 @@ module.exports = {
     //输出的路径，用了Node语法
     path: path.resolve(__dirname, 'dist'),
     //输出的文件名称
-    filename: 'bundle.js',
+    filename: 'Tview.js',
   },
   mode: 'development', //注意最新版本必须加mode，否则会报错
   //模块：例如解读CSS,图片如何转换，压缩
