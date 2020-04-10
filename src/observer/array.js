@@ -2,12 +2,12 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:55:58
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 09:57:31
+ * @LastEditTime: 2020-04-10 10:16:21
  * @Description: File Content
  */
 const arrayProto = Array.prototype
-const arrayMethods = Object.create(arrayProto)
-
+export const arrayMethods = Object.create(arrayProto)
+import { def } from '../util'
 /**
  * Intercept mutating methods and emit events
  */

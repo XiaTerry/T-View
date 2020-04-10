@@ -2,10 +2,10 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:55:51
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 09:57:22
+ * @LastEditTime: 2020-04-10 10:06:03
  * @Description: File Content
  */
-class Dep {
+export default class Dep {
   constructor() {
     this.subs = []
   }

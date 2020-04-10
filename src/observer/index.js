@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:55:43
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 09:57:13
+ * @LastEditTime: 2020-04-10 10:16:52
  * @Description: File Content
  */
 import Dep from './dep'
@@ -11,7 +11,7 @@ import { def, isObject, hasOwn } from '../util'
 
 const hasProto = '__proto__' in {}
 const arrayKeys = Object.getOwnPropertyNames(arrayMethods)
-class Observer {
+export default class Observer {
   constructor(value, vm) {
     this.value = value
     this.dep = new Dep()
@@ -103,6 +103,8 @@ function copyAugment(target, src, keys) {
 }
 
 function observe(value, asRootData) {
+  console.log(value)
+
   if (!isObject(value)) {
     return
   }

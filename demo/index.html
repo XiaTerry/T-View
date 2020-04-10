@@ -1,0 +1,58 @@
+<!--
+ * @Author: xiatairui_i
+ * @Date: 2020-04-10 10:07:31
+ * @LastEditors: xiatairui_i
+ * @LastEditTime: 2020-04-10 10:15:36
+ * @Description: File Content
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 插值绑定 -->
+      <p>{{name}}</p>
+      <!-- 指令解析 -->
+      <p t-text="name"></p>
+      <p>{{age}}</p>
+      <p>
+        {{doubleAge}}
+      </p>
+      <!-- 双向绑定 -->
+      <input type="text" t-model="name" />
+      <!-- 事件处理 -->
+      <button @click="changeName">呵呵</button>
+      <!-- html内容解析 -->
+      <div k-html="html"></div>
+    </div>
+    <script src="../dist/Tview.js"></script>
+    <script type="text/javascript">
+      const vw = new Tview({
+        el: '#app',
+        data: {
+          name: 'I am test.',
+          age: 12,
+          list: [1, 2, 3],
+          html: '<button>这是一个按钮</button>',
+        },
+        created() {
+          console.log('开始啦')
+          setTimeout(() => {
+            this.name = '我是测试'
+          }, 1500)
+        },
+        methods: {
+          changeName() {
+            this.name = '哈喽，Tview'
+            this.age = 1
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

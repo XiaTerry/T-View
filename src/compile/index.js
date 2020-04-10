@@ -2,11 +2,13 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:56:16
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 09:57:00
+ * @LastEditTime: 2020-04-10 10:05:40
  * @Description: File Content
  */
 const doc = document
-class Compile {
+import Watcher from '../observer/watcher'
+
+export default class Compile {
   constructor(el, vm) {
     // 要遍历的宿主节点
     this.$el = doc.querySelector(el)

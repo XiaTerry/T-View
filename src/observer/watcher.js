@@ -2,10 +2,10 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:56:03
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 09:57:43
+ * @LastEditTime: 2020-04-10 10:02:25
  * @Description: File Content
  */
-class Watcher {
+export default class Watcher {
   constructor(vm, expOrFn, cb) {
     this.vm = vm
     this.cb = cb
