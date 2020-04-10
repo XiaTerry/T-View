@@ -1,10 +1,12 @@
 {
   "name": "T-View",
   "version": "1.0.0",
-  "description": "T-view",
-  "main": "dist/Tview.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "rollup -c --watch & gulp default",
+    "build": "rollup -c & gulp sass"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,24 @@
   },
   "homepage": "https://github.com/XiaTerry/T-View#readme",
   "devDependencies": {
-    "webpack": "^4.42.0"
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "autoprefixer": "^9.4.8",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "rollup": "^1.2.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  },
+  "dependencies": {
+    "deepmerge": "^3.2.0"
   }
 }
