@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:55:43
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 10:16:52
+ * @LastEditTime: 2020-04-20 21:39:48
  * @Description: File Content
  */
 import Dep from './dep'
@@ -32,7 +32,6 @@ export default class Observer {
 
     for (let i = 0; i < keys.length; i++) {
       defineReactive(obj, keys[i])
-      this.proxyData(keys[i])
     }
   }
 
@@ -40,19 +39,6 @@ export default class Observer {
     for (let i = 0, l = items.length; i < l; i++) {
       observe(items[i])
     }
-  }
-
-  proxyData(key) {
-    const { vm } = this
-
-    Object.defineProperty(vm, key, {
-      get() {
-        return vm.$data[key]
-      },
-      set(newVal) {
-        vm.$data[key] = newVal
-      },
-    })
   }
 }
 
@@ -102,9 +88,7 @@ function copyAugment(target, src, keys) {
   }
 }
 
-function observe(value, asRootData) {
-  console.log(value)
-
+export function observe(value, asRootData) {
   if (!isObject(value)) {
     return
   }

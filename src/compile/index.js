@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 09:56:16
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 10:05:40
+ * @LastEditTime: 2020-04-21 18:09:34
  * @Description: File Content
  */
 const doc = document
@@ -22,6 +22,7 @@ export default class Compile {
       // 执行编译
       this.compile(this.$fragment)
       // 将编译完的html结果追加至$el
+
       this.$el.appendChild(this.$fragment)
     }
   }
@@ -41,21 +42,25 @@ export default class Compile {
 
   // 编译过程
   compile(el) {
-    const childNodes = el.childNodes
+    let childNodes = el.childNodes
+
     Array.from(childNodes).forEach((node) => {
       // 类型判断
-      console.log(node)
       if (this.isElement(node)) {
         // 元素
         // console.log('编译元素'+node.nodeName);
         // 查找t-，@，:
+
         const nodeAttrs = node.attributes
+
         Array.from(nodeAttrs).forEach((attr) => {
           const attrName = attr.name //属性名
           const exp = attr.value // 属性值
           if (this.isDirective(attrName)) {
             // t-text
             const dir = attrName.substring(2)
+            console.log(node.childNodes)
+
             // 执行指令
             this[dir] && this[dir](node, this.$vm, exp)
           }
@@ -78,7 +83,8 @@ export default class Compile {
   }
 
   compileText(node) {
-    // console.log(RegExp.$1);
+    console.log(node, this.$vm, RegExp.$1)
+
     this.update(node, this.$vm, RegExp.$1, 'text')
   }
 
@@ -87,10 +93,14 @@ export default class Compile {
     const updaterFn = this[dir + 'Updater']
     // 初始化
     updaterFn && updaterFn(node, vm[exp])
+    // console.log(vm, exp)
+
     // 依赖收集
-    new Watcher(vm, exp, function (value) {
+    const watcher = new Watcher(vm, exp, function (value) {
       updaterFn && updaterFn(node, value)
     })
+    // 存储依赖
+    vm._watchers.push(watcher)
   }
 
   text(node, vm, exp) {
@@ -120,8 +130,38 @@ export default class Compile {
     node.innerHTML = value
   }
 
-  textUpdater(node, value) {
+  for(node, vm, exp) {
+    this.update(node, vm, exp, 'for')
+  }
+
+  forUpdater(node, value) {
     node.textContent = value
+  }
+
+  textUpdater(node, value) {
+    if (Array.isArray(value)) {
+      const arrStr = []
+
+      const arr2str = (val) => {
+        val.forEach((item) => {
+          let str = ''
+          for (const key in item) {
+            if (Array.isArray(item[key])) {
+              arr2str(item[key])
+            } else {
+              str = str + `{${key}：${item[key]}}`
+              arrStr.push(str)
+            }
+          }
+        })
+      }
+
+      arr2str(value)
+
+      node.textContent = '[' + arrStr.join(',') + ']'
+    } else {
+      node.textContent = value
+    }
   }
 
   //   事件处理器
@@ -136,12 +176,15 @@ export default class Compile {
   isDirective(attr) {
     return attr.indexOf('t-') == 0
   }
+
   isEvent(attr) {
     return attr.indexOf('@') == 0
   }
+
   isElement(node) {
     return node.nodeType === 1
   }
+
   // 插值文本
   isInterpolation(node) {
     return node.nodeType === 3 && /\{\{(.*)\}\}/.test(node.textContent)

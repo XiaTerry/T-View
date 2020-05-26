@@ -1,4 +1,24 @@
 #app {
   background-color: whitesmoke;
-  height: 200px;
+  height: 1000px;
+  max-width: 960px;
+  margin: auto;
+}
+
+.array {
+  display: flex;
+  > h4 {
+    flex-grow: 4;
+  }
+
+  > button {
+    flex-grow: 1;
+    height: 36px;
+    width: 40px;
+  }
+}
+
+.demo-title {
+  text-align: center;
+  padding: 20px;
 }

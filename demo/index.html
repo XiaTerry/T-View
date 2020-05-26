@@ -2,7 +2,7 @@
  * @Author: xiatairui_i
  * @Date: 2020-04-10 10:07:31
  * @LastEditors: xiatairui_i
- * @LastEditTime: 2020-04-10 10:15:36
+ * @LastEditTime: 2020-05-26 22:03:29
  * @Description: File Content
  -->
 <!DOCTYPE html>
@@ -15,44 +15,128 @@
   </head>
   <body>
     <div id="app">
-      <!-- 插值绑定 -->
-      <p>{{name}}</p>
-      <!-- 指令解析 -->
-      <p t-text="name"></p>
-      <p>{{age}}</p>
-      <p>
-        {{doubleAge}}
-      </p>
-      <!-- 双向绑定 -->
-      <input type="text" t-model="name" />
-      <!-- 事件处理 -->
-      <button @click="changeName">呵呵</button>
-      <!-- html内容解析 -->
-      <div k-html="html"></div>
+      <h2 class="demo-title">T-View Demo</h2>
+      <ol>
+        <li>
+          <!-- 插值绑定 -->
+          <spap>插值绑定</spap>
+          <p>{{name}}</p>
+          <p>{{age}}</p>
+          <p>{{doubleAge}}</p>
+        </li>
+        <li>
+          <span>指令解析</span>
+          <p t-text="name"></p>
+        </li>
+        <li>
+          <span>对象双向绑定</span>
+          <input type="text" t-model="model" />
+          <p>{{model}}</p>
+        </li>
+        <li>
+          <span>数组双向绑定</span>
+          <p>{{items}}</p>
+          <div>
+            <button @click="handlePush">添加元素</button>
+            <button @click="handlePop">删除元素</button>
+          </div>
+        </li>
+        <li>
+          <span>事件绑定</span>
+          <div>
+            <button @click="changeName">点击事件</button>
+          </div>
+        </li>
+        <li>
+          <span>虚拟dom</span>
+          <div>
+            <input type="button" value="生成dom" onclick="handleClick1()" />
+            <input type="button" value="diff dom" onclick="handleClick2()" />
+          </div>
+        </li>
+      </ol>
     </div>
     <script src="../dist/Tview.js"></script>
     <script type="text/javascript">
       const vw = new Tview({
         el: '#app',
         data: {
+          model: 'T-view',
           name: 'I am test.',
           age: 12,
-          list: [1, 2, 3],
+          items: [
+            { message: 'Foo' },
+            { message: 'Bar' },
+            { item: [{ item1: 1 }] },
+          ],
           html: '<button>这是一个按钮</button>',
         },
+
         created() {
-          console.log('开始啦')
           setTimeout(() => {
             this.name = '我是测试'
           }, 1500)
         },
+
         methods: {
           changeName() {
             this.name = '哈喽，Tview'
             this.age = 1
           },
+
+          handlePush() {
+            this.items.push({ age: 20 })
+          },
+
+          handlePop() {
+            this.items.pop()
+          },
         },
       })
+      var ulRoot
+      function handleClick1() {
+        var el = vd.el
+        var ul = el('div', { id: 'virtual-dom' }, [
+          el('p', {}, ['Virtual DOM']),
+          el('ul', { id: 'list' }, [
+            el('li', { class: 'item' }, ['Item 1']),
+            el('li', { class: 'item' }, ['Item 2']),
+            el('li', { class: 'item' }, ['Item 3']),
+          ]),
+          el('div', {}, ['Hello World']),
+        ])
+
+        console.log()
+        ulRoot = ul.render()
+        document.getElementById('app').appendChild(ulRoot)
+      }
+      function handleClick2() {
+        var el = vd.el
+        var diff = vd.diff
+        var patch = vd.patch
+
+        var ul1 = el('div', { id: 'virtual-dom' }, [
+          el('p', {}, ['Virtual DOM']),
+          el('ul', { id: 'list' }, [
+            el('li', { class: 'item' }, ['Item 1']),
+            el('li', { class: 'item' }, ['Item 2']),
+            el('li', { class: 'item' }, ['Item 3']),
+          ]),
+          el('div', {}, ['Hello World']),
+        ])
+        var ul2 = el('div', { id: 'virtual-dom' }, [
+          el('p', {}, ['Virtual DOM']),
+          el('ul', { id: 'list' }, [
+            el('li', { class: 'item' }, ['Item 21']),
+            el('li', { class: 'item' }, ['Item 23']),
+          ]),
+          el('p', {}, ['Hello World']),
+        ])
+        var patches = diff(ul1, ul2)
+        console.log('patches:', patches)
+
+        patch(ulRoot, patches)
+      }
     </script>
   </body>
 </html>

@@ -13,7 +13,7 @@ import commonJs from 'rollup-plugin-commonjs'
 
 const getConfig = (minify = false) => {
   const config = {
-    input: 'src/index.js',
+    input: 'src/instance/index.js',
     output: {
       file: `dist/Tview${minify ? '.min' : ''}.js`,
       format: 'umd', //rollup生成包格式amd(异步模块)，cjs(CommonJs)，umd(通用模式)
